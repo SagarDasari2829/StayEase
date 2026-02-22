@@ -1,0 +1,95 @@
+<%  layout("/layouts/boilerplate.ejs") %>
+
+
+
+<style>
+ .tax-toggle{
+    border: 1px solid black;
+    width: 15rem;
+    height: 3rem;
+    border-radius: 10px;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+ 
+    
+ }
+
+  .tax-info{
+    display: none ;
+      }
+   
+
+  
+</style>
+
+<div class="listings-container">
+
+
+<div class="filters">
+<div class="tax-toggle mt-2  " >
+
+  <div class="form-check- reverse form-switch ">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label " for="switchCheckDefault">Display total after texs</label>
+
+</div>
+
+</div>
+
+</div>
+<div>
+<% if (allListings.length === 0) { %>
+  <div class="text-center mt-5">
+    <h4>No destinations found 😢</h4>
+  </div>
+<% } %>
+</div>
+
+
+  
+
+<div class="row   row-cols-lg-3  row-cols-md-2 row-cols-sm-1  mt-3">
+  <% for(let listing of allListings ) { %>
+    <a href="/listings/<%= listing._id %>"   class="listing-link">
+     <div class="card col listing-card">
+       <img src="<%= listing.image.url%>" class="card-img-top" alt="listing Image" style="height: 20rem"/>
+          <div class="card-img-overlay"></div>
+     <div class="card-body">
+        <p class="card-text"> 
+        <b> <%= listing.title%> </b>
+        <br>
+        &#8377;<%= listing.price.toLocaleString("en-IN")%>/night
+        <i class="tax-info"> &nbsp; &nbsp; +18 % GST </i>
+         </p>
+    
+  </div>
+</div>
+</a>
+   <% } %>
+     
+</div>
+
+
+</div>
+
+<script>
+
+ let textSwitch = document.getElementById("switchCheckDefault")
+  textSwitch.addEventListener("click" , () => {
+      let tsxInfo = document.getElementsByClassName("tax-info")
+      for (info of tsxInfo){
+        if(info.style.display != "inline"){
+        info.style.display = "inline";
+        }else{
+                info.style.display = "none";
+        }
+      }
+  });
+
+
+
+
+
+
+</script>
